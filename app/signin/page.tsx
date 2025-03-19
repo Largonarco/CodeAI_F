@@ -2,13 +2,13 @@
 
 import type React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FirebaseService } from "@/lib/firebase-client";
 import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 
-export default function LoginPage() {
+function LoginPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -143,5 +143,13 @@ export default function LoginPage() {
 				</div>
 			</div>
 		</div>
+	);
+}
+
+export default function WrapperLoginPage() {
+	return (
+		<Suspense>
+			<LoginPage />
+		</Suspense>
 	);
 }
